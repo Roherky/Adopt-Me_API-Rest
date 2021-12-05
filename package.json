@@ -1,19 +1,25 @@
 {
-  "name": "api-rest",
+  "name": "reto_1",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "index.js",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "env": "^0.0.2",
+    "express": "^4.17.1",
+    "express-myconnection": "^1.0.4",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.10.0",
+    "mysql2": "^2.3.2",
+    "nodemon": "^2.0.15",
+    "socket.io": "^4.4.0"
+  },
   "scripts": {
+    "dev": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Roherky/Adopt-Me_API-Rest.git"
-  },
   "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Roherky/Adopt-Me_API-Rest/issues"
-  },
-  "homepage": "https://github.com/Roherky/Adopt-Me_API-Rest#readme"
+  "license": "ISC"
 }
