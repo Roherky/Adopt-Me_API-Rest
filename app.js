@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const mysqlConnection  = require('./config/sql');
-const cors = require ('cors');
+const cors = require('cors');
 // Routes
 const adoptante = require('./app/routers/adoptante');
 const animal = require('./app/routers/animal');
@@ -26,5 +26,5 @@ app.use(login_registro);
 
 // Iniciar Servidor
 app.listen(app.get('port'), () => {
-  console.log(`Servidor en Puerto ${app.get('port')}`);
+  console.log(`Servidor conectándose en el puerto ${app.get('port')}`);
 });
