@@ -2,18 +2,39 @@ const express = require('express');
 const routes = express.Router();
 const mysqlConnection  = require('../../config/sql');
 
-routes.get('/messages',(req, res)=>{
-    console.log('Use to  routers')
-})
-routes.post('/messages',(req, res)=>{
-    console.log('post')
+// Endpoint de get
+routes.get("/finalfeliz", function(request, response){
+    let id = request.query.id;
+    let sql;
+    if (id == null) sql = "SELECT * FROM finalesfelices";
+    else sql = "SELECT * FROM finalesfelices WHERE id_finalesfelices = " + id;
+
+    console.log(sql);
+    mysqlConnection.query(sql, function(error, resultado){
+        if(error) console.log(error) + console.log("No hemos podido procesar su solicitud");
+        else response.send(resultado);
+    })
 })
 
-routes.put('/messages',(req, res)=>{
-    console.log('pull')
+// Endpoint de post
+routes.post("/finalfeliz", function(request, response){
+    let nombreAnimal = request.body.nombreAnimal;
+    let fechaPublicacion = request.body.fechaPublicacion;
+    let descripcion = request.body.descripcion;
+    let imagenes = request.body.imagenes;
+    let sql = "INSERT INTO finalesfelices (nombreAnimal, fechaPublicacion, descripcion, imagenes) " +
+              "VALUES ('" + nombreAnimal + "', '" + fechaPublicacion + "', '" + descripcion +
+              "', '" + imagenes + "')";
+
+    console.log(sql);
+    mysqlConnection.query(sql, function(error, resultado){
+        if(error) console.log(error) + console.log("No hemos podido procesar su solicitud");
+        else {
+            console.log(resultado);
+            if(resultado.insertId) response.send(String(resultado.insertId));
+            else response.send("-1");
+        }
+    })
 })
 
-routes.delete('/messages',(req, res)=>{
-    console.log('delete')
-})
 module.exports = routes;

@@ -7,11 +7,11 @@ routes.get("/adoptante", function(request, response){
     let id = request.query.id;
     let sql;
     if(id == null) sql = "SELECT * FROM adoptante";
-    if(id != null) sql = "SELECT * FROM adoptante WHERE id_adoptante = " + id;
+    else sql = "SELECT * FROM adoptante WHERE id_adoptante = " + id;
 
     console.log(sql);
     mysqlConnection.query(sql, function(error, resultado){
-        if(error) console.log(error) + console.log("No es posible encontrar al usuario");
+        if(error) console.log(error) + console.log("No hemos podido procesar su solicitud");
         else response.send(resultado);
     })
 })
@@ -72,8 +72,14 @@ routes.put("/adoptante", function(request, response){
            WHERE adoptante.id_adoptante = ?";
     console.log(sql);
     mysqlConnection.query(sql, params, function(error, resultado){
-        if(error) console.log(error) + console.log("No hemos podido procesar su solicitud");
-        else response.send(resultado);
+        if(error){
+            console.log(error) + console.log("No hemos podido procesar su solicitud");
+            response.send("-1");
+        }
+        else {
+            console.log(resultado);
+            response.send(resultado);
+        }
     })
 })
 
@@ -84,8 +90,14 @@ routes.delete("/adoptante", function(request, response){
     sql = "DELETE FROM adoptante WHERE adoptante.id_adoptante = " + id;
     console.log(sql);
     mysqlConnection.query(sql, function(error, resultado){
-        if(error) console.log(error) + console.log("No hemos podido procesar su solicitud");
-        else response.send(resultado);
+        if(error){
+            console.log(error) + console.log("No hemos podido procesar su solicitud");
+            response.send("-1");
+        }
+        else {
+            console.log(resultado);
+            response.send(String(resultado));
+        }
     })
 })
 

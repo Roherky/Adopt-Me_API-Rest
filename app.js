@@ -6,7 +6,7 @@ const cors = require('cors');
 const adoptante = require('./app/routers/adoptante');
 const animal = require('./app/routers/animal');
 const login_registro = require('./app/routers/login_registro');
-
+const finalesFelices = require('./app/routers/finalesFelices');
 
 app.use(cors());
 app.use(express.json());
@@ -18,11 +18,8 @@ app.set('port', process.env.PORT || 3000);
 app.use(express.json());
 app.use(animal);
 app.use(adoptante);
+app.use(finalesFelices);
 app.use(login_registro);
-
-
-
-
 
 // Iniciar Servidor
 app.listen(app.get('port'), () => {
