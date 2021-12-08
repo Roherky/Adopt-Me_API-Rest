@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 -- MySQL dump 10.13  Distrib 8.0.27, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: adot-me
@@ -326,7 +325,6 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2021-12-05 18:37:16
-=======
 -- MySQL dump 10.13  Distrib 8.0.27, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: adot-me
@@ -654,4 +652,3 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2021-12-05 18:37:16
->>>>>>> fe04b48154e540fe8e6feb352cf8e7d5fb620771
