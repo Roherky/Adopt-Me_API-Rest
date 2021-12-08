@@ -23,7 +23,7 @@ routes.post("/noticias", function(request, response){
     let descripcion = request.body.descripcion;
     let imagen = request.body.imagen;
     let id_Protectora = request.body.id_Proctectora;
-    let sql = "INSERT INTO finalesfelices (titulo, categoria, prioridad, fecha_publicacion,descripcion, imagen, id_Protectora) " +
+    let sql = "INSERT INTO noticias (titulo, categoria, prioridad, fecha_publicacion,descripcion, imagen, id_Protectora) " +
               "VALUES ('" + titulo+ "', '" + categoria + "', '"+ prioridad + "', '" + fecha_publicacion + "', '"+ descripcion +
               + "', '"+ id_Protectora + "', '" + imagen + "')";
 
