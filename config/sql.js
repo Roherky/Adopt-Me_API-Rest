@@ -2,8 +2,8 @@ const mysql = require('mysql2');
 const mysqlConnection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'CodenotchMySQL',
-    database: 'adopt-me',
+    password: '123456',
+    database: 'adoptme',
     // multipleStatements: true
 });
 
