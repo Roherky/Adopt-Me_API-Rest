@@ -47,7 +47,7 @@ routes.post("/adoptante", function(request, response){
 // Endpoint de put
 routes.put("/adoptante", function(request, response){
     let sql;
-    let id = request.body.id;
+    let id = request.body.id_adoptante;
     let nombre = request.body.nombre;
     let apellidos = request.body.apellidos;
     let fechaNacimiento = request.body.fechaNacimiento;
@@ -69,7 +69,7 @@ routes.put("/adoptante", function(request, response){
            localidad = COALESCE (?, localidad), \n\
            direccion = COALESCE (?, direccion), \n\
            imagenPerfil = COALESCE (?, imagenPerfil) \n\
-           WHERE adoptante.id_adoptante = ?";
+           WHERE id_adoptante = ?";
     console.log(sql);
     mysqlConnection.query(sql, params, function(error, resultado){
         if(error){
@@ -86,8 +86,8 @@ routes.put("/adoptante", function(request, response){
 // Endpoint de delete
 routes.delete("/adoptante", function(request, response){
     let sql;
-    let id = request.body.id;
-    sql = "DELETE FROM adoptante WHERE adoptante.id_adoptante = " + id;
+    let id = request.body.id_adoptante;
+    sql = "DELETE FROM adoptante WHERE id_adoptante = " + id;
     console.log(sql);
     mysqlConnection.query(sql, function(error, resultado){
         if(error){
