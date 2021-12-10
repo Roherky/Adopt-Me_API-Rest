@@ -22,16 +22,17 @@ routes.post("/adoptante", function(request, response){
     let apellidos = request.body.apellidos;
     let fechaNacimiento = request.body.fechaNacimiento;
     let telefono = request.body.telefono;
-    let email = request.body.email;
-    let password = request.body.password;
     let localidad = request.body.localidad;
-    let direccion = request.body.direccion;
-    let imagenPerfil = request.body.imagenPerfil;
-    let sql = "INSERT INTO adoptante (nombre, apellidos, fechaNacimiento, telefono, email, \n\
-               password, localidad, direccion, imagenPerfil) " + "VALUES \n\
-               ('" + nombre + "', '" + apellidos + "', '" + fechaNacimiento + "', '" + telefono +
-               "', '" + email + "', '" + password + "', '" + localidad + "', '" + 
-               direccion + "', '" + imagenPerfil + "')";
+    let descripcion = request.body.descripcion;
+    let dirrecion = request.body.direccion;
+    let sql = "INSERT INTO adoptante (nombre, apellidos, fechaNacimiento, telefono, localidad, descripcion, dirrecion)" + "VALUES ('" +
+               nombre + "', '" +
+               apellidos + "', '" +
+               fechaNacimiento + "', '" +
+               telefono + "', '" +
+               localidad + "', '" +
+               descripcion + "', '" +
+               dirrecion + "')";
 
     console.log(sql);
     mysqlConnection.query(sql, function(error, resultado){
@@ -47,38 +48,33 @@ routes.post("/adoptante", function(request, response){
 // Endpoint de put
 routes.put("/adoptante", function(request, response){
     let sql;
-    let id = request.body.id_adoptante;
+    let id = request.body.id_Adoptante;
     let nombre = request.body.nombre;
     let apellidos = request.body.apellidos;
     let fechaNacimiento = request.body.fechaNacimiento;
     let telefono = request.body.telefono;
-    let email = request.body.email;
-    let password = request.body.password;
     let localidad = request.body.localidad;
-    let direccion = request.body.direccion;
-    let imagenPerfil = request.body.imagenPerfil;
-    let params = [nombre, apellidos, fechaNacimiento, telefono, email, password,
-                  localidad, direccion, imagenPerfil, id];
+    let descripcion = request.body.descripcion;
+    let dirrecion = request.body.direccion;
+    let params = [nombre, apellidos, fechaNacimiento, telefono,
+                  localidad, descripcion, dirrecion, id];
     console.log(request.body);
     sql = "UPDATE adoptante SET nombre = COALESCE (?, nombre), \n\
            apellidos = COALESCE (?, apellidos), \n\
            fechaNacimiento = COALESCE (?, fechaNacimiento), \n\
            telefono = COALESCE (?, telefono), \n\
-           email = COALESCE (?, email), \n\
-           password = COALESCE (?, password), \n\
            localidad = COALESCE (?, localidad), \n\
-           direccion = COALESCE (?, direccion), \n\
-           imagenPerfil = COALESCE (?, imagenPerfil) \n\
+           descripcion = COALESCE (?, descripcion), \n\
+           dirrecion = COALESCE (?, dirrecion) \n\
            WHERE id_adoptante = ?";
     console.log(sql);
     mysqlConnection.query(sql, params, function(error, resultado){
-        if(error){
-            console.log(error) + console.log("No hemos podido procesar su solicitud");
-            response.send("-1");
-        }
+        if(error) console.log(error) + console.log("No hemos podido procesar su solicitud");
         else {
-            console.log(resultado);
-            response.send(resultado);
+            if(resultado.affectedRows == 1){
+                response.send(String(resultado.affectedRows));
+            }
+            else console.log(resultado);
         }
     })
 })

@@ -19,12 +19,15 @@ routes.get("/finalfeliz", function(request, response){
 // Endpoint de post
 routes.post("/finalfeliz", function(request, response){
     let nombreAnimal = request.body.nombreAnimal;
-    let fechaPublicacion = request.body.fechaPublicacion;
+    let fecha_Publicacion = request.body.fecha_Publicacion;
     let descripcion = request.body.descripcion;
     let imagenes = request.body.imagenes;
-    let sql = "INSERT INTO finalesfelices (nombreAnimal, fechaPublicacion, descripcion, imagenes) " +
-              "VALUES ('" + nombreAnimal + "', '" + fechaPublicacion + "', '" + descripcion +
-              "', '" + imagenes + "')";
+    let sql = "INSERT INTO finalesfelices (nombreAnimal, fecha_Publicacion, descripcion, imagenes)" +
+              "VALUES ('" +
+              nombreAnimal + "', '" +
+              fecha_Publicacion + "', '" +
+              descripcion + "', '" +
+              imagenes + "')";
 
     console.log(sql);
     mysqlConnection.query(sql, function(error, resultado){

@@ -16,12 +16,16 @@ router.get('/pruebas', (req,res)=>{
 })
 
 router.post('/login', (req, res)=>{
-    const {user,password} = req.body;
-   let sql = "select * from user where user=? and password=?";
-   let value =[user,password];
+    const {email,password} = req.body;
+    console.log(email);
+    console.log(password);
+   let sql = "select * from login where email=? and password=?";
+   let value =[email,password];
     
    mysqlConnection.query(sql,value, (err,result)=>{
        if(!err){
+           res.json(result);
+           console.log(result);
             // let data = json.stringify(result[0]);
             // const token = jwt.sign(data,'strong');
             // res.json({token})
