@@ -1,8 +1,8 @@
+//Funciona todo
+
 const express = require('express');
 const routes = express.Router();
 const mysqlConnection  = require('../../config/sql');
-
-
 
 routes.get('/animal',(req, res)=>{
     console.log('get animal');
@@ -29,7 +29,7 @@ routes.get('/animal',(req, res)=>{
 routes.post('/animal',(req, res)=>{
     console.log('post')
 
-    let sql="INSERT INTO animal (nombre, raza, sexo, imagen, tipo_animal, estado, fecha_ingresso, descripcion,  id_protectora) VALUES ('" +req.body.nombre +"', '"+
+    let sql="INSERT INTO animal (nombre, raza, sexo, imagen, tipo_animal, estado, fecha_ingresso, descripcion,  id_protectora,tamanyo) VALUES ('" +req.body.nombre +"', '"+
     req.body.raza +"', '"+
     req.body.sexo +"', '"+
     req.body.imagen +"', '"+
@@ -37,7 +37,8 @@ routes.post('/animal',(req, res)=>{
     req.body.estado +"', '"+
     req.body.fecha_ingresso +"', '"+
     req.body.descripcion +"', '"+
-    req.body.id_protectora+"')";
+    req.body.id_protectora +"', '"+
+    req.body.tamanyo+"')";
 
 
     mysqlConnection.query(sql, function(err, result){
@@ -47,9 +48,9 @@ routes.post('/animal',(req, res)=>{
         else{
 
         if(result.insertId)
-        res.send(String(result.insertId));
-        else
-        res.send("-1");
+            res.send(String(result.insertId));
+            else
+            res.send("-1");
         }
         })
 })
@@ -65,6 +66,7 @@ routes.put('/animal',(req, res)=>{
         req.body.estado,
         req.body.fecha_ingresso,
         req.body.id_protectora,
+        req.body.tamanyo,
         req.body.idAnimal];
 
         let sql="UPDATE animal SET nombre= COALESCE(?, nombre) ,"+
@@ -74,7 +76,8 @@ routes.put('/animal',(req, res)=>{
         "tipo_animal= COALESCE(?, tipo_animal) ,"+
         "estado= COALESCE(?, estado) ,"+
         "fecha_ingresso= COALESCE(?, fecha_ingresso) ,"+
-        "id_protectora = COALESCE(?, id_protectora) WHERE idAnimal=?";  
+        "id_protectora= COALESCE(?, id_protectora) ,"+
+        "tamanyo = COALESCE(?, tamanyo) WHERE idAnimal=?";  
 
         mysqlConnection.query(sql, params, function(err, result){
     
