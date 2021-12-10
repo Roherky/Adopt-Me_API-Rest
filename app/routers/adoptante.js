@@ -17,22 +17,6 @@ routes.get("/adoptante", function(request, response){
     })
 })
 
-<<<<<<< HEAD
-// Endpoint de put
-routes.put("/adoptante", function(request, response){
-    let sql;
-    const {id_Adoptante,nombre,apellidos,fechaNacimiento,telefono,email,password,localidad,descripcion,direccion, imagenPerfil} = request.body;
-    let params = [nombre, apellidos, fechaNacimiento, telefono,
-                  localidad, descripcion,direccion,id_Adoptante];
-    console.log(request.body);
-    sql = "UPDATE adoptante SET nombre = COALESCE(?, nombre) , " + 
-          "apellidos = COALESCE(?, apellidos) , " + 
-          "fechaNacimiento = COALESCE(?, fechaNacimiento) , " + 
-          "telefono = COALESCE(?, telefono) , " + 
-          "localidad = COALESCE(?, localidad) , " + 
-          "descripcion = COALESCE(?, descripcion) , " + 
-          "direccion = COALESCE(?, direccion)  WHERE id_Adoptante = ?";
-=======
 // Endpoint de post
 routes.post("/adoptante", function(request, response){
     let nombre = request.body.nombre;
@@ -84,7 +68,6 @@ routes.put("/adoptante", function(request, response){
            descripcion = COALESCE (?, descripcion), \n\
            dirrecion = COALESCE (?, dirrecion) \n\
            WHERE id_adoptante = ?";
->>>>>>> prueba1
     console.log(sql);
     mysqlConnection.query(sql, params, function(error, resultado){
         if(error) console.log(error) + console.log("No hemos podido procesar su solicitud");
