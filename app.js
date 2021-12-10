@@ -9,6 +9,7 @@ const animal = require('./app/routers/animal');
 const login_registro = require('./app/routers/login_registro');
 const chat = require('./app/routers/socket.io_chat');
 const protectora = require('./app/routers/protectora');
+const noticias = require('./app/routers/noticias');
 // Settings
 app.set('port', process.env.PORT || 3000);
 
@@ -22,7 +23,7 @@ app.use(adoptante);
 app.use(login_registro);
 app.use(chat);
 app.use(protectora);
-
+app.use(noticias);
 
 
 

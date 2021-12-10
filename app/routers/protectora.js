@@ -20,16 +20,13 @@ routes.get('/protectora',(req, res)=>{
     })
 });
 
-
 routes.put('/protectora',(req, res)=>{
     console.log(req.body);
     let params = [ 
                     req.body.nombre, 
                     req.body.direccion, 
                     req.body.localidad,
-                    req.body.email,
                     req.body.telefono,
-                    req.body.animales,
                     req.body.imagen,
                     req.body.descripcion,
                     req.body.id_Protectora]
@@ -37,9 +34,7 @@ routes.put('/protectora',(req, res)=>{
     let sql = "UPDATE protectora SET nombre = COALESCE(?, nombre) , " + 
                 "direccion = COALESCE(?, direccion) , " + 
                 "localidad = COALESCE(?, localidad) , " + 
-                "email = COALESCE(?, email) , " + 
                 "telefono = COALESCE(?, telefono) , " + 
-                "animales = COALESCE(?, animales) , " + 
                 "imagen = COALESCE(?, imagen) , " + 
                 "descripcion = COALESCE(?, descripcion)  WHERE id_Protectora = ?";
     console.log(sql); 
@@ -54,4 +49,18 @@ routes.put('/protectora',(req, res)=>{
     })
 })
 
+// routes.delete('/protectora',(req, res)=>{
+//      console.log(req.body);
+//     let sql = "DELETE FROM protectora WHERE id_Protectora = '" + req.body.id_Protectora + "'";
+//     console.log(sql); 
+//     mysqlConnection.query(sql, function (err, result) 
+//     {
+//         if (err) 
+//             console.log(err);
+//         else 
+//         {
+//             res.send(result);
+//         }
+//     })
+// })
 module.exports = routes;

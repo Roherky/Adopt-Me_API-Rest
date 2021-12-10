@@ -76,8 +76,8 @@ routes.put('/animal',(req, res)=>{
         "tipo_animal= COALESCE(?, tipo_animal) ,"+
         "estado= COALESCE(?, estado) ,"+
         "fecha_ingresso= COALESCE(?, fecha_ingresso) ,"+
-        "fecha_ingresso= COALESCE(?, id_protectora) ,"+
-        "id_protectora = COALESCE(?, tamanyo) WHERE idAnimal=?";  
+        "id_protectora= COALESCE(?, id_protectora) ,"+
+        "tamanyo = COALESCE(?, tamanyo) WHERE idAnimal=?";  
 
         mysqlConnection.query(sql, params, function(err, result){
     
