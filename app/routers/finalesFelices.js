@@ -18,11 +18,27 @@ routes.get("/finalfeliz", function(request, response){
 
 // Endpoint de post
 routes.post("/finalfeliz", function(request, response){
+<<<<<<< HEAD
     const {nombreAnimal,fechaPublicacion,descripcion,imagenes,id_adoptante} = req.body;
     let sql = "INSERT INTO finalesfelices (nombreAnimal, fecha_Publicacion, descripcion, imagenes, id_adoptante) VALUES (?,?,?,?,?);";
     let value = [nombreAnimal,fechaPublicacion,descripcion,imagenes,id_adoptante];
     
     mysqlConnection.query(sql,value, function(error, resultado){
+=======
+    let nombreAnimal = request.body.nombreAnimal;
+    let fecha_Publicacion = request.body.fecha_Publicacion;
+    let descripcion = request.body.descripcion;
+    let imagenes = request.body.imagenes;
+    let sql = "INSERT INTO finalesfelices (nombreAnimal, fecha_Publicacion, descripcion, imagenes)" +
+              "VALUES ('" +
+              nombreAnimal + "', '" +
+              fecha_Publicacion + "', '" +
+              descripcion + "', '" +
+              imagenes + "')";
+
+    console.log(sql);
+    mysqlConnection.query(sql, function(error, resultado){
+>>>>>>> prueba1
         if(error) console.log(error) + console.log("No hemos podido procesar su solicitud");
         else {
             console.log(resultado);

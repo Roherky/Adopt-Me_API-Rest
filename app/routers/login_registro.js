@@ -17,11 +17,17 @@ router.get('/pruebas', (req,res)=>{
 
 router.post('/login', (req, res)=>{
     const {email,password} = req.body;
+<<<<<<< HEAD
+=======
+    console.log(email);
+    console.log(password);
+>>>>>>> prueba1
    let sql = "select * from login where email=? and password=?";
    let value =[email,password];
     
    mysqlConnection.query(sql,value, (err,result)=>{
        if(!err){
+<<<<<<< HEAD
 
         if(result.length == 0){
             res.send("Contraseña  o email incorrecto");
@@ -32,6 +38,12 @@ router.post('/login', (req, res)=>{
             const token = jwt.sign(data,'stil');
             res.send(token)
              console.log(jwt.verify(token,'stil'));
+=======
+           res.json(result);
+           console.log(result);
+            // let data = json.stringify(result[0]);
+            // const token = jwt.sign(data,'strong');
+>>>>>>> prueba1
             // res.json({token})
         }   
             
