@@ -4,10 +4,9 @@ const mysqlConnection  = require('../../config/sql');
 
 // Endpoint de get
 routes.get("/finalfeliz", function(request, response){
-    let id = request.query.id;
     let sql;
-    if (id == null) sql = "SELECT * FROM finalesfelices";
-    else sql = "SELECT * FROM finalesfelices WHERE id_finalesfelices = " + id;
+    sql = "SELECT * FROM finalesfelices \n\
+           ORDER BY fecha_Publicacion ASC;";
 
     console.log(sql);
     mysqlConnection.query(sql, function(error, resultado){

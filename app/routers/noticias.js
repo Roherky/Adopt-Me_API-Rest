@@ -18,7 +18,7 @@ routes.get("/noticias", function(request, response){
 routes.post('/noticias',(req, res)=>{
     console.log(req.body);
     let sql = "INSERT INTO noticias (titular, categoria, prioridad, fecha_publicacion, descripcion, imagen, id_Protectora) " + 
-            "VALUES ('" + req.body.titular + "', '" + 
+            "VALUES ('" + req.body.titulo + "', '" + 
                             req.body.categoria + "', '" +
                             req.body.prioridad + "', '" +
                             req.body.fecha_publicacion + "', '" +

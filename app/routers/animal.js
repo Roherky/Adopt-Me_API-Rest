@@ -7,22 +7,82 @@ const mysqlConnection  = require('../../config/sql');
 routes.get('/animal',(req, res)=>{
     console.log('get animal');
 
-    let sql;
-    var nombreAnimal = req.query.nombreAnimal
-    if(nombreAnimal==null)
-     sql="SELECT * FROM animal";
-    else
-     sql="SELECT * FROM animal WHERE nombre="+nombreAnimal;
+   let sql = "SELECT * FROM animal";
+   // let sql;
 
-     mysqlConnection.query(sql, function(err, result){
+    let nombreAnimal = req.query.nombreAnimal;
+    let sexo = req.query.sexo;
+    let tipoAnimal = req.query.tipoAnimal;
+    let ingreso = req.query.ingreso;
+    let idProtec=req.query.idProtec;
+    let idAnimal=req.query.idAnimal;
 
-        if(err)
-        console.log(err);
-        else{
+ 
+
+    
+
+    nombreAnimal = (!nombreAnimal || nombreAnimal==="")? false : nombreAnimal; 
+    sexo = (!sexo || sexo==="")? false : sexo;
+    tipoAnimal = (!tipoAnimal || tipoAnimal==="")? false : tipoAnimal;
+    ingreso = (!ingreso || ingreso==="")? false : ingreso;
+    idProtec = (!idProtec || idProtec==="")? false : idProtec;
+    idAnimal = (!idAnimal || idAnimal==="")? false : idAnimal;
+
+    console.log(nombreAnimal);
+    console.log(sexo);
+    console.log(tipoAnimal);
+    console.log(ingreso);
+
+
+
+
+    if (nombreAnimal || sexo || tipoAnimal  || ingreso || idProtec || idAnimal) {
+   
+        sql = sql + " WHERE ";
+        if (nombreAnimal) {
+            sql = `${sql} nombre='${nombreAnimal}' AND `
+        }
+        if (sexo) {
+            sql = `${sql} sexo='${sexo}' AND `
+        }
+        if (tipoAnimal) {
+            sql = `${sql} tipo_animal='${tipoAnimal}' AND`
+        }
+        if (ingreso) {
+            sql = `${sql} fecha_ingresso='${ingreso}' AND`;
+        }
+
+
+        if(idProtec){
+            sql = `${sql} id_protectora='${idProtec}' AND `
+        }
+
+        if(idAnimal){
+            sql = `${sql} idAnimal='${idAnimal}' AND `
+        }
+
+
+
+        sql = sql.substring(0, sql.length - 4);
+        sql = `${sql} AND estado='adopcion'`
+    }
+    else{
+        sql = `${sql} WHERE estado='adopcion'`
+    }
+
+
+    
+    mysqlConnection.query(sql, function (err, result) {
+
+        if (err)
+            console.log(err);
+        else {
+            console.log(result);
             res.send(result);
         }
 
     })
+
 
     
 })
@@ -106,12 +166,11 @@ routes.delete('/animal',(req, res)=>{
         if(err)
         console.log(err);
         else{
-            if(result.affectedRows==1){
-            res.send(String(idAnimal));
-            }
-           else
-           console.log(result)
            
+            if(result.affectedRows==1)
+              res.send(String(result.affectedRows));
+             else
+               res.send("0");
         }
     })
 })

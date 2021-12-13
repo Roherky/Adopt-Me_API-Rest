@@ -3,6 +3,7 @@ const express = require('express');
 const routes = express.Router();
 const mysqlConnection  = require('../../config/sql');
 
+
 // Endpoint de get
 routes.get("/adoptante", function(request, response){
     let id = request.query.id;
@@ -25,15 +26,15 @@ routes.post("/adoptante", function(request, response){
     let telefono = request.body.telefono;
     let localidad = request.body.localidad;
     let descripcion = request.body.descripcion;
-    let dirrecion = request.body.direccion;
-    let sql = "INSERT INTO adoptante (nombre, apellidos, fechaNacimiento, telefono, localidad, descripcion, dirrecion)" + "VALUES ('" +
+    let direccion = request.body.direccion;
+    let sql = "INSERT INTO adoptante (nombre, apellidos, fechaNacimiento, telefono, localidad, descripcion, direccion)" + "VALUES ('" +
                nombre + "', '" +
                apellidos + "', '" +
                fechaNacimiento + "', '" +
                telefono + "', '" +
                localidad + "', '" +
                descripcion + "', '" +
-               dirrecion + "')";
+               direccion + "')";
 
     console.log(sql);
     mysqlConnection.query(sql, function(error, resultado){
@@ -56,9 +57,9 @@ routes.put("/adoptante", function(request, response){
     let telefono = request.body.telefono;
     let localidad = request.body.localidad;
     let descripcion = request.body.descripcion;
-    let dirrecion = request.body.direccion;
+    let direccion = request.body.direccion;
     let params = [nombre, apellidos, fechaNacimiento, telefono,
-                  localidad, descripcion, dirrecion, id];
+                  localidad, descripcion, direccion, id];
     console.log(request.body);
     sql = "UPDATE adoptante SET nombre = COALESCE (?, nombre), \n\
            apellidos = COALESCE (?, apellidos), \n\
@@ -66,8 +67,8 @@ routes.put("/adoptante", function(request, response){
            telefono = COALESCE (?, telefono), \n\
            localidad = COALESCE (?, localidad), \n\
            descripcion = COALESCE (?, descripcion), \n\
-           dirrecion = COALESCE (?, dirrecion) \n\
-           WHERE id_adoptante = ?";
+           direccion = COALESCE (?, direccion) \n\
+           WHERE id_Adoptante = ?";
     console.log(sql);
     mysqlConnection.query(sql, params, function(error, resultado){
         if(error) console.log(error) + console.log("No hemos podido procesar su solicitud");
@@ -83,8 +84,8 @@ routes.put("/adoptante", function(request, response){
 // Endpoint de delete
 routes.delete("/adoptante", function(request, response){
     let sql;
-    let id = request.body.id_adoptante;
-    sql = "DELETE FROM adoptante WHERE id_adoptante = " + id;
+    let id = request.body.id_Adoptante;
+    sql = "DELETE FROM adoptante WHERE id_Adoptante = " + id;
     console.log(sql);
     mysqlConnection.query(sql, function(error, resultado){
         if(error){

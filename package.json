@@ -1,8 +1,8 @@
 {
-  "name": "reto_1",
+  "name": "adopt-me_api-rest",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
@@ -21,6 +21,14 @@
     "dev": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Roherky/Adopt-Me_API-Rest.git"
+  },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Roherky/Adopt-Me_API-Rest/issues"
+  },
+  "homepage": "https://github.com/Roherky/Adopt-Me_API-Rest#readme"
 }

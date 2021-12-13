@@ -17,42 +17,30 @@ router.get('/pruebas', (req,res)=>{
 
 router.post('/login', (req, res)=>{
     const {email,password} = req.body;
-    console.log(email);
-    console.log(password);
    let sql = "select * from login where email=? and password=?";
    let value =[email,password];
     
    mysqlConnection.query(sql,value, (err,result)=>{
+       console.log(result);
        if(!err){
-
         if(result.length == 0){
-            res.send("Email o contraseña incorrectos");
+            res.send({mensaje: "incorrecto"});
         }else{
-            //console.log("Se ha logueado correctamente");
-            //res.send(result);
-             let data = JSON.stringify(result[0]);
-            const token = jwt.sign(data,'stil');
-            res.send(token)
-             console.log(jwt.verify(token,'stil'));
-           res.json(result);
-           console.log(result);
-            // let data = json.stringify(result[0]);
-            // const token = jwt.sign(data,'strong');
-            // res.json({token})
-        }   
-            
+            res.send({mensaje: "correcto", respuesta: result});
+        }           
        }else{
            res.send(err)
        }
    })
 })
 //Ruta de registro
-router.post('/registro', (req,res)=>{
-    const{eleccion} = req.body;
+router.post('/registro', (req, res) => {
+    const {eleccion} = req.body;
+    console.log(eleccion);
     if(eleccion == 'protectora'){
-        const {nombre,direccion,localidad,telefono,email,password} = req.body;
+        const {nombre, direccion, localidad, telefono, email, password} = req.body;
         let sql = 'INSERT INTO protectora (nombre, direccion, localidad, telefono) VALUES (?,?,?,?)';
-        let value = [nombre,direccion,localidad,telefono];
+        let value = [nombre, direccion, localidad, telefono];
         mysqlConnection.query(sql,value, (err,result)=>{
             if(!err){  
                 const id =result.insertId
@@ -64,18 +52,16 @@ router.post('/registro', (req,res)=>{
                                 }else{
                                     console.log(err);
                                 }
-                            })
-                        
-                          
+                            })                     
             }else{
                 res.json(err);
             }
         })
     }
-    if(eleccion== 'adoptantes'){
-        const {nombre,apellidos,fechaNacimiento,telefono,localidad,dirrecion,email,password} = req.body;
-        let sql = 'INSERT INTO `adoptante` (`nombre`, `apellidos`, `fechaNacimiento`, `telefono`, `localidad`,`dirrecion`) VALUES (?,?,?,?,?,?)';
-        let value =[nombre,apellidos,fechaNacimiento,telefono,localidad,dirrecion];
+    if(eleccion == 'adoptante'){
+        const {nombre, apellidos, fechaNacimiento, telefono, localidad, direccion, email, password} = req.body;
+        let sql = 'INSERT INTO `adoptante` (`nombre`, `apellidos`, `fechaNacimiento`, `telefono`, `localidad`,`direccion`) VALUES (?,?,?,?,?,?)';
+        let value =[nombre,apellidos,fechaNacimiento,telefono,localidad,direccion];
         mysqlConnection.query(sql,value, (err,result)=>{
             if(!err){
                 const id = result.insertId;
@@ -93,8 +79,6 @@ router.post('/registro', (req,res)=>{
         })
     }
 })
-
-
 
 router.post('/test',verifyToken,(req, res)=>{
     console.log(req.data);
