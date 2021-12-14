@@ -6,11 +6,11 @@ routes.get('/imagenes',(req, res)=>{
     console.log('get imagen');
 
     let sql;
-    var id_imagenes = req.query.id_imagenes
-    if(id_imagenes==null)
+    var id_animal = req.query.id_animal
+    if(id_animal==null)
      sql="SELECT * FROM imagenes";
     else
-     sql="SELECT * FROM imagenes WHERE id_imagenes="+id_imagenes;
+     sql="SELECT * FROM imagenes WHERE id_animal="+id_animal;
 
      mysqlConnection.query(sql, function(err, result){
 
