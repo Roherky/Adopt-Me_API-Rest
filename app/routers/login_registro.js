@@ -34,10 +34,7 @@ router.post('/login', (req, res)=>{
    })
 })
 //Ruta de registro
-router.post('/registro', (req, res) => {
-    const {eleccion} = req.body;
-    console.log(eleccion);
-    if(eleccion == 'protectora'){
+router.post('/registro/protectora', (req, res) => {
         const {nombre, direccion, localidad, telefono, email, password} = req.body;
         let sql = 'INSERT INTO protectora (nombre, direccion, localidad, telefono) VALUES (?,?,?,?)';
         let value = [nombre, direccion, localidad, telefono];
@@ -57,8 +54,10 @@ router.post('/registro', (req, res) => {
                 res.json(err);
             }
         })
-    }
-    if(eleccion == 'adoptante'){
+})
+
+
+router.post('/registro/adoptante', (req, res)=>{
         const {nombre, apellidos, fechaNacimiento, telefono, localidad, direccion, email, password} = req.body;
         let sql = 'INSERT INTO `adoptante` (`nombre`, `apellidos`, `fechaNacimiento`, `telefono`, `localidad`,`direccion`) VALUES (?,?,?,?,?,?)';
         let value =[nombre,apellidos,fechaNacimiento,telefono,localidad,direccion];
@@ -77,7 +76,6 @@ router.post('/registro', (req, res) => {
                 res.send(err)
             }
         })
-    }
 })
 
 router.post('/test',verifyToken,(req, res)=>{
