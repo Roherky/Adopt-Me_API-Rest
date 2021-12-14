@@ -126,8 +126,10 @@ routes.put('/animal',(req, res)=>{
         req.body.estado,
         req.body.fecha_ingresso,
         req.body.id_protectora,
+        req.body.descripcion,
         req.body.tamanyo,
         req.body.idAnimal];
+        
 
         let sql="UPDATE animal SET nombre= COALESCE(?, nombre) ,"+
         "raza= COALESCE(?, raza) ,"+
@@ -137,6 +139,7 @@ routes.put('/animal',(req, res)=>{
         "estado= COALESCE(?, estado) ,"+
         "fecha_ingresso= COALESCE(?, fecha_ingresso) ,"+
         "id_protectora= COALESCE(?, id_protectora) ,"+
+        "descripcion= COALESCE(?, descripcion) ,"+
         "tamanyo = COALESCE(?, tamanyo) WHERE idAnimal=?";  
 
         mysqlConnection.query(sql, params, function(err, result){
