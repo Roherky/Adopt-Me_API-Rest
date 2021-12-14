@@ -11,6 +11,7 @@ const chat = require('./app/routers/socket.io_chat');
 const protectora = require('./app/routers/protectora');
 const noticias = require('./app/routers/noticias');
 const finalesFelices = require('./app/routers/finalesFelices');
+const imagenes = require('./app/routers/imagenes');
 // Settings
 let port = process.env.PORT||300;
 // app.set('port', process.env.PORT || 3000);
@@ -27,6 +28,7 @@ app.use(chat);
 app.use(protectora);
 app.use(noticias);
 app.use(finalesFelices);
+app.use(imagenes);
 
 
 
