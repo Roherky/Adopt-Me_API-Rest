@@ -21,12 +21,14 @@ routes.post("/finalfeliz", function(request, response){
     let fecha_Publicacion = request.body.fecha_Publicacion;
     let descripcion = request.body.descripcion;
     let imagenes = request.body.imagenes;
-    let sql = "INSERT INTO finalesfelices (nombreAnimal, fecha_Publicacion, descripcion, imagenes)" +
+    let id_adoptante = request.body.id_adoptante;
+    let sql = "INSERT INTO finalesfelices (nombreAnimal, fecha_Publicacion, descripcion, imagenes, id_adoptante)" +
               "VALUES ('" +
               nombreAnimal + "', '" +
               fecha_Publicacion + "', '" +
               descripcion + "', '" +
-              imagenes + "')";
+              imagenes + "', '" +
+              id_adoptante + "')";
 
     console.log(sql);
     mysqlConnection.query(sql, function(error, resultado){
