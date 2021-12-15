@@ -3,7 +3,7 @@ const mysqlConnection = mysql.createConnection({
     host: 'adopt-me.ccnf3ko9yyj0.us-east-2.rds.amazonaws.com',
     user: 'admin',
     password: '12345678',
-    database: 'adot-me',
+    database: 'adopt-me',
 });
 
 mysqlConnection.connect(function (err) {
