@@ -129,7 +129,7 @@ routes.put('/animal',(req, res)=>{
         req.body.descripcion,
         req.body.tamanyo,
         req.body.idAnimal];
-        
+
 
         let sql="UPDATE animal SET nombre= COALESCE(?, nombre) ,"+
         "raza= COALESCE(?, raza) ,"+
