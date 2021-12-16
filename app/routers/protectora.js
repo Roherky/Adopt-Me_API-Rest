@@ -22,7 +22,7 @@ routes.get('/protectora',(req, res)=>{
 
 routes.post('/protectora',(req, res)=>{
         console.log(req.body);
-        let sql = "INSERT INTO protectora (nombre, direccion, localidad, email, telefono, animales, imagen, descripcion) " + 
+        let sql = "INSERT INTO adopt-me.protectora (nombre, direccion, localidad, email, telefono, animales, imagen, descripcion) " + 
                 "VALUES ('" + req.body.nombre + "', '" + 
                                 req.body.direccion + "', '" +
                                 req.body.localidad + "', '" +

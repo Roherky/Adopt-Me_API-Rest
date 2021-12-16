@@ -27,7 +27,7 @@ routes.post("/adoptante", function(request, response){
     let localidad = request.body.localidad;
     let descripcion = request.body.descripcion;
     let direccion = request.body.direccion;
-    let sql = "INSERT INTO adoptante (nombre, apellidos, fechaNacimiento, telefono, localidad, descripcion, direccion)" + "VALUES ('" +
+    let sql = "INSERT INTO adopt-me.adoptante (nombre, apellidos, fechaNacimiento, telefono, localidad, descripcion, direccion)" + "VALUES ('" +
                nombre + "', '" +
                apellidos + "', '" +
                fechaNacimiento + "', '" +
