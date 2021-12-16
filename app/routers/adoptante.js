@@ -27,14 +27,16 @@ routes.post("/adoptante", function(request, response){
     let localidad = request.body.localidad;
     let descripcion = request.body.descripcion;
     let direccion = request.body.direccion;
-    let sql = "INSERT INTO adopt-me.adoptante (nombre, apellidos, fechaNacimiento, telefono, localidad, descripcion, direccion)" + "VALUES ('" +
+    let imagenPerfil = request.body.imagenPerfil;
+    let sql = "INSERT INTO adoptante (nombre, apellidos, fechaNacimiento, telefono, localidad, descripcion, direccion, imagenPerfil)" + "VALUES ('" +
                nombre + "', '" +
                apellidos + "', '" +
                fechaNacimiento + "', '" +
                telefono + "', '" +
                localidad + "', '" +
                descripcion + "', '" +
-               direccion + "')";
+               direccion + "', '" +
+               imagenPerfil + "')";
 
     console.log(sql);
     mysqlConnection.query(sql, function(error, resultado){
@@ -48,35 +50,36 @@ routes.post("/adoptante", function(request, response){
 })
 
 // Endpoint de put
-routes.put("/adoptante", function(request, response){
-    let sql;
-    let id = request.body.id_Adoptante;
-    let nombre = request.body.nombre;
-    let apellidos = request.body.apellidos;
-    let fechaNacimiento = request.body.fechaNacimiento;
-    let telefono = request.body.telefono;
-    let localidad = request.body.localidad;
-    let descripcion = request.body.descripcion;
-    let direccion = request.body.direccion;
-    let params = [nombre, apellidos, fechaNacimiento, telefono,
-                  localidad, descripcion, direccion, id];
-    console.log(request.body);
-    sql = "UPDATE adoptante SET nombre = COALESCE (?, nombre), \n\
-           apellidos = COALESCE (?, apellidos), \n\
-           fechaNacimiento = COALESCE (?, fechaNacimiento), \n\
-           telefono = COALESCE (?, telefono), \n\
-           localidad = COALESCE (?, localidad), \n\
-           descripcion = COALESCE (?, descripcion), \n\
-           direccion = COALESCE (?, direccion) \n\
-           WHERE id_Adoptante = ?";
+routes.put("/adoptante", function(req, res){
+    console.log(req.body);
+    let params = [ 
+                    req.body.nombre, 
+                    req.body.apellidos, 
+                    req.body.fechaNacimiento,        
+                    req.body.telefono,
+                    req.body.localidad,
+                    req.body.direccion,
+                    req.body.descripcion,
+                    req.body.imagenPerfil,
+                    req.body.id
+                ]
+    console.log(params)
+    let sql = "UPDATE adoptante SET nombre = COALESCE(?, nombre) , " + 
+    "apellidos = COALESCE(?, apellidos) , " + 
+    "fechaNacimiento = COALESCE(?, fechaNacimiento) , " + 
+    "telefono = COALESCE(?, telefono) , " + 
+    "localidad = COALESCE(?, localidad) , " + 
+    "direccion = COALESCE(?, direccion) , " + 
+    "descripcion = COALESCE(?, descripcion) , " + 
+    "imagenPerfil = COALESCE(?, imagenPerfil)  WHERE id_Adoptante = ?";
     console.log(sql);
-    mysqlConnection.query(sql, params, function(error, resultado){
-        if(error) console.log(error) + console.log("No hemos podido procesar su solicitud");
-        else {
-            if(resultado.affectedRows == 1){
-                response.send(String(resultado.affectedRows));
-            }
-            else console.log(resultado);
+    mysqlConnection.query(sql, params,function (err, result) {
+        if(err) {
+            console.log(err);
+        }
+        else 
+        {
+            res.send(result);
         }
     })
 })

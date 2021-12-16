@@ -55,8 +55,9 @@ routes.put('/protectora',(req, res)=>{
                     req.body.telefono,
                     req.body.imagen,
                     req.body.descripcion,
-                    req.body.id_Protectora]
-
+                    req.body.id
+                ]
+    console.log(params)
     let sql = "UPDATE protectora SET nombre = COALESCE(?, nombre) , " + 
                 "direccion = COALESCE(?, direccion) , " + 
                 "localidad = COALESCE(?, localidad) , " + 
