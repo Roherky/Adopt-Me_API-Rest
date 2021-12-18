@@ -3,10 +3,10 @@ const routes = express.Router();
 const mysqlConnection  = require('../../config/sql');
 // Get
 routes.get("/noticias", function(request, response){
-    let id = request.query.id;
+    let id_Protectora = request.query.id_Protectora;
     let sql;
-    if (id == null) sql = "SELECT * FROM noticias";
-    else sql = "SELECT * FROM noticias WHERE id_noticias = " + id;
+    if (id_Protectora == null) sql = "SELECT * FROM noticias";
+    else sql = "SELECT * FROM noticias WHERE id_Protectora = " + id_Protectora;
 
     console.log(sql);
     mysqlConnection.query(sql, function(error, resultado){
@@ -77,11 +77,14 @@ routes.delete('/noticias',(req, res)=>{
     console.log(sql); 
     mysqlConnection.query(sql, function (err, result) 
     {
-        if (err) 
-            console.log(err);
-        else 
-        {
-            res.send(result);
+        if(err)
+        console.log(err);
+        else{
+           
+            if(result.affectedRows==1)
+              res.send(String(result.affectedRows));
+             else
+               res.send("0");
         }
     })
 })
