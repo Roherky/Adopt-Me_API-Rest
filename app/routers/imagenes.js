@@ -26,7 +26,7 @@ routes.get('/imagenes',(req, res)=>{
 routes.post('/imagenes',(req, res)=>{
     console.log('post')
 
-    let sql="INSERT INTO imagenes (id_adoptantes, id_protectora, id_animal, id_noticia, id_final_feliz, imagen) VALUES ('" +req.body.id_adoptantes +"', '"+
+    let sql="INSERT INTO imagenes (id_adoptante, id_protectora, id_animal, id_noticia, id_final_feliz, imagen) VALUES ('" +req.body.id_adoptantes +"', '"+
     req.body.id_protectora +"', '"+
     req.body.id_animal +"', '"+
     req.body.id_noticia +"', '"+
