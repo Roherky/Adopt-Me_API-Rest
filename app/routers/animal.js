@@ -5,10 +5,7 @@ const routes = express.Router();
 const mysqlConnection  = require('../../config/sql');
 
 routes.get('/animal',(req, res)=>{
-    console.log('get animal');
-
    let sql = "SELECT * FROM animal";
-   // let sql;
 
     let nombreAnimal = req.query.nombreAnimal;
     let sexo = req.query.sexo;
@@ -16,10 +13,6 @@ routes.get('/animal',(req, res)=>{
     let ingreso = req.query.ingreso;
     let idProtec=req.query.idProtec;
     let idAnimal=req.query.idAnimal;
-
- 
-
-    
 
     nombreAnimal = (!nombreAnimal || nombreAnimal==="")? false : nombreAnimal; 
     sexo = (!sexo || sexo==="")? false : sexo;
@@ -32,9 +25,6 @@ routes.get('/animal',(req, res)=>{
     console.log(sexo);
     console.log(tipoAnimal);
     console.log(ingreso);
-
-
-
 
     if (nombreAnimal || sexo || tipoAnimal  || ingreso || idProtec || idAnimal) {
    
@@ -51,18 +41,12 @@ routes.get('/animal',(req, res)=>{
         if (ingreso) {
             sql = `${sql} fecha_ingresso='${ingreso}' AND`;
         }
-
-
         if(idProtec){
             sql = `${sql} id_protectora='${idProtec}' AND `
         }
-
         if(idAnimal){
             sql = `${sql} idAnimal='${idAnimal}' AND `
         }
-
-
-
         sql = sql.substring(0, sql.length - 4);
         sql = `${sql} AND estado='adopcion'`
     }
@@ -70,8 +54,6 @@ routes.get('/animal',(req, res)=>{
         sql = `${sql} WHERE estado='adopcion'`
     }
 
-
-    
     mysqlConnection.query(sql, function (err, result) {
 
         if (err)
@@ -80,26 +62,22 @@ routes.get('/animal',(req, res)=>{
             console.log(result);
             res.send(result);
         }
-
-    })
-
-
-    
+    }) 
 })
+
 routes.post('/animal',(req, res)=>{
     console.log('post')
 
-    let sql="INSERT INTO animal (nombre, raza, sexo, imagen, tipo_animal, estado, fecha_ingresso, descripcion,  id_protectora,tamanyo) VALUES ('" +req.body.nombre +"', '"+
-    req.body.raza +"', '"+
-    req.body.sexo +"', '"+
-    req.body.imagen +"', '"+
-    req.body.tipo_animal +"', '"+
-    req.body.estado +"', '"+
-    req.body.fecha_ingresso +"', '"+
-    req.body.descripcion +"', '"+
-    req.body.id_protectora +"', '"+
-    req.body.tamanyo+"')";
-
+    let sql="INSERT INTO animal (nombre, raza, sexo, imagen, tipo_animal, estado, fecha_ingresso, descripcion,  id_protectora,tamanyo) VALUES ('" + req.body.nombre +"', '"+
+    req.body.raza + "', '"+
+    req.body.sexo + "', '"+
+    req.body.imagen + "', '"+
+    req.body.tipo_animal + "', '"+
+    req.body.estado + "', '"+
+    req.body.fecha_ingresso + "', '"+
+    req.body.descripcion + "', '"+
+    req.body.id_protectora + "', '"+
+    req.body.tamanyo+ "')";
 
     mysqlConnection.query(sql, function(err, result){
 
@@ -112,7 +90,7 @@ routes.post('/animal',(req, res)=>{
             else
             res.send("-1");
         }
-        })
+    })
 })
 
 routes.put('/animal',(req, res)=>{
@@ -129,7 +107,6 @@ routes.put('/animal',(req, res)=>{
         req.body.descripcion,
         req.body.tamanyo,
         req.body.idAnimal];
-
 
         let sql="UPDATE animal SET nombre= COALESCE(?, nombre) ,"+
         "raza= COALESCE(?, raza) ,"+
@@ -151,11 +128,9 @@ routes.put('/animal',(req, res)=>{
                 res.send(String(result.affectedRows));
                 }
                else
-               console.log(result)
-               
+               console.log(result)     
             }
         })
-
 })
 
 routes.delete('/animal',(req, res)=>{
@@ -168,8 +143,7 @@ routes.delete('/animal',(req, res)=>{
     
         if(err)
         console.log(err);
-        else{
-           
+        else{  
             if(result.affectedRows==1)
               res.send(String(result.affectedRows));
              else
