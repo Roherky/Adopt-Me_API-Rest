@@ -29,7 +29,7 @@ app.use(protectora);
 app.use(noticias);
 app.use(finalesFelices);
 app.use(imagenes);
-
+app.use(chat);
 // Iniciar Servidor
 // app.listen(app.get('port'), () => {
 //   console.log(`Servidor en Puerto ${app.get('port')}`);
