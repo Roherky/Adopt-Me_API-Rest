@@ -9,7 +9,7 @@ routes.get('/imagenes',(req, res)=>{
     var id_animal = req.query.id_animal;
     var id_protectora = req.query.id_protectora;
 
-    if(id_protectora!=null && id_animal==null){
+    if(id_protectora!=null){
         sql="SELECT * FROM imagenes WHERE id_protectora="+id_protectora +"AND id_animal=0";
     }
     else{
