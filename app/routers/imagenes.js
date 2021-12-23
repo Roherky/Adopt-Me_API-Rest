@@ -6,12 +6,24 @@ routes.get('/imagenes',(req, res)=>{
     console.log('get imagen');
 
     let sql;
-    var id_animal = req.query.id_animal
+    var id_animal = req.query.id_animal;
+    var id_protectora = req.query.id_protectora;
+    console.log(id_protectora);
+    console.log(id_animal);
+
+    if(id_protectora!=null){
+        sql="SELECT * FROM imagenes WHERE id_protectora="+id_protectora +" AND id_animal=0 ORDER BY id_imagenes DESC";
+        console.log(sql);
+    }
+    else{
+
+  
+
     if(id_animal==null)
      sql="SELECT * FROM imagenes";
     else
      sql="SELECT * FROM imagenes WHERE id_animal="+id_animal;
-
+    }
      mysqlConnection.query(sql, function(err, result){
 
         if(err)
