@@ -14,12 +14,17 @@ const finalesFelices = require('./app/routers/finalesFelices');
 const imagenes = require('./app/routers/imagenes');
 // Settings
 let port = process.env.PORT||300;
-// app.set('port', process.env.PORT || 3000);
 
 // Middlewares
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(cors());
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+
 //Rutas --
 app.use(animal);
 app.use(adoptante);
@@ -30,8 +35,5 @@ app.use(noticias);
 app.use(finalesFelices);
 app.use(imagenes);
 app.use(chat);
-// Iniciar Servidor
-// app.listen(app.get('port'), () => {
-//   console.log(`Servidor en Puerto ${app.get('port')}`);
-// });
+
 app.listen(port);

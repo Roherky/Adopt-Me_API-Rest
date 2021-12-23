@@ -4,11 +4,10 @@ const mysqlConnection  = require('../../config/sql');
 
 //Endpoint de login
 router.post('/login', (req, res) => {
-    const {email,password} = req.body;
+    const {email, password} = req.body;
     let sql = "SELECT * FROM login WHERE email = ? and password = ?";
     let value = [email, password];  
-    mysqlConnection.query(sql,value, (err,result)=>{
-        console.log(result);
+    mysqlConnection.query(sql,value, (err, result) => {
         if(!err){
             if(result.length == 0) {
                 res.send({mensaje: "incorrecto"});
@@ -32,8 +31,8 @@ router.post('/registro/protectora', (req, res) => {
         if(!err){  
             const id = result.insertId;
             let value = [id, email, password];
-            mysqlConnection.query('INSERT INTO login (id_Protectora, email, password) VALUES (?, ?, ?)', value, (err, res) => {
-            if(!err) console.log(res);
+            mysqlConnection.query('INSERT INTO login (id_Protectora, email, password) VALUES (?, ?, ?)', value, (err, result) => {
+            if(!err) res.send({usuario: "protectora", respuesta: result});
             else console.log(err);
             })                     
         }
@@ -49,12 +48,12 @@ router.post('/registro/adoptante', (req, res) => {
         if(!err){
             const id = result.insertId;
             let value = [id, email, password];
-            mysqlConnection.query('INSERT INTO login (id_adoptante, email, password) VALUES (?, ?, ?)', value,(err, res) => {
-            if(!err) console.log(res);
-            else console.log(err);   
+            mysqlConnection.query('INSERT INTO login (id_adoptante, email, password) VALUES (?, ?, ?)', value, (err, result) => {
+            if(!err) res.send({usuario: "adoptante", respuesta: result});
+            else console.log(err);
             })
         }
-        else res.send(err)           
+        else res.json(err);
     })
 })
 
