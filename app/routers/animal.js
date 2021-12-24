@@ -48,7 +48,10 @@ routes.get('/animal',(req, res)=>{
             sql = `${sql} idAnimal='${idAnimal}' AND `
         }
         sql = sql.substring(0, sql.length - 4);
-        sql = `${sql} AND estado='adopcion'`
+
+        if(idProtec==false){
+            sql = `${sql} AND estado='adopcion'`
+        }
     }
     else{
         sql = `${sql} WHERE estado='adopcion'`

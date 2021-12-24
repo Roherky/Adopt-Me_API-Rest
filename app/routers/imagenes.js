@@ -8,6 +8,7 @@ routes.get('/imagenes',(req, res)=>{
     let sql;
     var id_animal = req.query.id_animal;
     var id_protectora = req.query.id_protectora;
+    var id_adoptante=req.query.id_adoptante;
     console.log(id_protectora);
     console.log(id_animal);
 
@@ -16,6 +17,12 @@ routes.get('/imagenes',(req, res)=>{
         sql="SELECT * FROM imagenes WHERE id_protectora="+id_protectora +" AND id_animal=0 ORDER BY id_imagenes DESC";
         console.log(sql);
     }
+
+    else if(id_adoptante!=null){
+        sql="SELECT * FROM imagenes WHERE id_adoptante="+id_adoptante;
+        console.log(sql);
+    }
+
     else{
 
   
