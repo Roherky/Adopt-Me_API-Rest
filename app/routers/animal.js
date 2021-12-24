@@ -54,11 +54,7 @@ routes.get('/animal',(req, res)=>{
         }
     }
     else{
-        if(idProtec==false){
         sql = `${sql} WHERE estado='adopcion'`
-        }else{
-            sql=sql;
-        }
     }
 
     mysqlConnection.query(sql, function (err, result) {
