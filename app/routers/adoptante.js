@@ -92,14 +92,17 @@ routes.delete("/adoptante", function(request, response){
     console.log(sql);
     mysqlConnection.query(sql, function(error, resultado){
         if(error){
-            console.log(error) + console.log("No hemos podido procesar su solicitud");
-            response.send("-1");
+            console.log(error);
         }
         else {
-            console.log(resultado);
-            response.send(String(resultado));
+            if(resultado.affectedRows==1)
+            response.send(String(resultado.affectedRows));
+
+            else
+             resultado.send("0");
         }
     })
 })
+
 
 module.exports = routes;
