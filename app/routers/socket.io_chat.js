@@ -5,7 +5,7 @@ const mysqlConnection  = require('../../config/sql');
 // Endpoints de get
 routes.get("/chat", function(request, response){
     let id = request.query.id;
-    let sql = "SELECT * FROM chat WHERE id_login1 = " + id + "OR id_login2 = " + id;
+    let sql = "SELECT * FROM chat WHERE id_login1 = " + id + " OR id_login2 = " + id;
     mysqlConnection.query(sql, function(error, resultado){
         if(error) console.log(error) + console.log("No hemos podido procesar su solicitud");
         else response.send(resultado);
