@@ -3,7 +3,7 @@ const routes = express.Router();
 const mysqlConnection  = require('../../config/sql');
 
 // Endpoints de get
-routes.get("/chats", function(request, response){
+routes.get("/chat", function(request, response){
     let id = request.query.id;
     let sql = "SELECT * FROM chat WHERE id_login1 = " + id + "OR id_login2 = " + id;
     mysqlConnection.query(sql, function(error, resultado){
@@ -12,7 +12,7 @@ routes.get("/chats", function(request, response){
     })
 })
 
-routes.get("/mensajes", function(request, response){
+routes.get("/mensaje", function(request, response){
     let id = request.query.id;
     let sql = "SELECT * FROM mensaje WHERE id_chat = " + id;
     mysqlConnection.query(sql, function(error, resultado){
