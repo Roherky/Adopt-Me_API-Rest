@@ -8,7 +8,7 @@ routes.get("/chat", function(request, response){
     let sql = "SELECT * FROM chat WHERE id_login1 = " + id + " OR id_login2 = " + id;
     mysqlConnection.query(sql, function(error, resultado){
         if(error) console.log(error) + console.log("No hemos podido procesar su solicitud");
-        else response.send(resultado);
+        else response.send(resultado) + console.log(resultado);
     })
 })
 
@@ -17,7 +17,7 @@ routes.get("/mensaje", function(request, response){
     let sql = "SELECT * FROM mensaje WHERE id_chat = " + id;
     mysqlConnection.query(sql, function(error, resultado){
         if(error) console.log(error) + console.log("No hemos podido procesar su solicitud");
-        else response.send(resultado);
+        else response.send(resultado) + console.log(resultado);
     })
 })
 
@@ -33,7 +33,7 @@ routes.post("/chat", function(request, response){
             let value = [id, mensaje, id_emisor, id_receptor];
             mysqlConnection.query("INSERT INTO mensaje (id_chat, mensaje, id_emisor, id_receptor) \n\
             VALUES (?, ?, ?, ?)", value, function(error, resultado){
-                if(!error) response.send({chat: "creado", respuesta: resultado});
+                if(!error) response.send({chat: "creado", respuesta: resultado}) + console.log(resultado);
                 else console.log(error);
             })
         }
@@ -46,7 +46,7 @@ routes.post("/mensaje", function(request, response){
     let sql = "INSERT INTO mensaje (id_chat, mensaje, id_emisor, id_receptor) VALUES (?, ?, ?, ?)";
     let value = [id_chat, mensaje, id_emisor, id_receptor];
     mysqlConnection.query(sql, value, function(error, resultado){
-        if(!error) response.send({mensaje: "creado", respuesta: resultado});
+        if(!error) response.send({mensaje: "creado", respuesta: resultado}) + console.log(resultado);
         else console.log(error);
     })
 })
