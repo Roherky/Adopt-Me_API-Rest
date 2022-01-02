@@ -12,6 +12,62 @@ routes.get("/chat", function(request, response){
     })
 })
 
+routes.get("/chat/login1/adoptante", function(request, response){
+    let id = request.query.id;
+    let sql = "SELECT * FROM chat AS c \n\
+    INNER JOIN login AS l \n\
+    ON (c.id_login1 = l.id_login) \n\
+    INNER JOIN adoptante AS a \n\
+    ON (l.id_adoptante = a.id_Adoptante) \n\
+    WHERE c.id_login1 = " + id;
+    mysqlConnection.query(sql, function(error, resultado){
+        if(error) console.log(error) + console.log("No hemos podido procesar su solicitud");
+        else response.send(resultado) + console.log(resultado);
+    })
+})
+
+routes.get("/chat/login2/adoptante", function(request, response){
+    let id = request.query.id;
+    let sql = "SELECT * FROM chat AS c \n\
+    INNER JOIN login AS l \n\
+    ON (c.id_login2 = l.id_login) \n\
+    INNER JOIN adoptante AS a \n\
+    ON (l.id_adoptante = a.id_Adoptante) \n\
+    WHERE c.id_login2 = " + id;
+    mysqlConnection.query(sql, function(error, resultado){
+        if(error) console.log(error) + console.log("No hemos podido procesar su solicitud");
+        else response.send(resultado) + console.log(resultado);
+    })
+})
+
+routes.get("/chat/login1/protectora", function(request, response){
+    let id = request.query.id;
+    let sql = "SELECT * FROM chat AS c \n\
+    INNER JOIN login AS l \n\
+    ON (c.id_login1 = l.id_login) \n\
+    INNER JOIN protectora AS p \n\
+    ON (l.id_protectora = p.id_Protectora) \n\
+    WHERE c.id_login1 = " + id;
+    mysqlConnection.query(sql, function(error, resultado){
+        if(error) console.log(error) + console.log("No hemos podido procesar su solicitud");
+        else response.send(resultado) + console.log(resultado);
+    })
+})
+
+routes.get("/chat/login2/protectora", function(request, response){
+    let id = request.query.id;
+    let sql = "SELECT * FROM chat AS c \n\
+    INNER JOIN login AS l \n\
+    ON (c.id_login2 = l.id_login) \n\
+    INNER JOIN protectora AS p \n\
+    ON (l.id_protectora = p.id_Protectora) \n\
+    WHERE c.id_login2 = " + id;
+    mysqlConnection.query(sql, function(error, resultado){
+        if(error) console.log(error) + console.log("No hemos podido procesar su solicitud");
+        else response.send(resultado) + console.log(resultado);
+    })
+})
+
 routes.get("/mensaje", function(request, response){
     let id = request.query.id;
     let sql = "SELECT * FROM mensaje WHERE id_chat = " + id;
