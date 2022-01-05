@@ -2,7 +2,7 @@ const express = require('express');
 const routes = express.Router();
 const mysqlConnection  = require('../../config/sql');
 
-routes.get('/protectora',(req, res)=>{
+routes.get('/protectora', (req, res)=>{
     let sql;
     if (req.query.id == null)
         sql = "SELECT * FROM protectora";
@@ -20,7 +20,7 @@ routes.get('/protectora',(req, res)=>{
     })
 });
 
-routes.post('/protectora',(req, res)=>{
+routes.post('/protectora', (req, res)=>{
         console.log(req.body);
         let sql = "INSERT INTO adopt-me.protectora (nombre, direccion, localidad, email, telefono, animales, imagen, descripcion) " + 
                 "VALUES ('" + req.body.nombre + "', '" + 

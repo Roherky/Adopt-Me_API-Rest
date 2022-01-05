@@ -21,11 +21,6 @@ routes.get('/animal',(req, res)=>{
     idProtec = (!idProtec || idProtec==="")? false : idProtec;
     idAnimal = (!idAnimal || idAnimal==="")? false : idAnimal;
 
-    console.log(nombreAnimal);
-    console.log(sexo);
-    console.log(tipoAnimal);
-    console.log(ingreso);
-
     if (nombreAnimal || sexo || tipoAnimal  || ingreso || idProtec || idAnimal) {
    
         sql = sql + " WHERE ";

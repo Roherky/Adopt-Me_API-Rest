@@ -12,9 +12,9 @@ routes.get("/chat", function(request, response){
     })
 })
 
-routes.get("/chat/login1/adoptante", function(request, response){
+routes.get("/chat/login/adoptante", function(request, response){
     let id = request.query.id;
-    let sql = "SELECT * FROM chat AS c \n\
+    let sql = "SELECT DISTINCT * FROM chat AS c \n\
     INNER JOIN login AS l \n\
     ON (c.id_login1 = l.id_login) \n\
     INNER JOIN adoptante AS a \n\
@@ -26,13 +26,13 @@ routes.get("/chat/login1/adoptante", function(request, response){
     })
 })
 
-routes.get("/chat/login2/adoptante", function(request, response){
+routes.get("/chat/login/protectora", function(request, response){
     let id = request.query.id;
-    let sql = "SELECT * FROM chat AS c \n\
+    let sql = "SELECT DISTINCT * FROM chat AS c \n\
     INNER JOIN login AS l \n\
     ON (c.id_login2 = l.id_login) \n\
-    INNER JOIN adoptante AS a \n\
-    ON (l.id_adoptante = a.id_Adoptante) \n\
+    INNER JOIN protectora AS p \n\
+    ON (l.id_protectora = p.id_Protectora) \n\
     WHERE c.id_login2 = " + id;
     mysqlConnection.query(sql, function(error, resultado){
         if(error) console.log(error) + console.log("No hemos podido procesar su solicitud");
@@ -40,27 +40,37 @@ routes.get("/chat/login2/adoptante", function(request, response){
     })
 })
 
-routes.get("/chat/login1/protectora", function(request, response){
+routes.get("/idlogin/adoptante", function(request, response){
     let id = request.query.id;
-    let sql = "SELECT * FROM chat AS c \n\
+    let sql = "SELECT DISTINCT id_login1 FROM chat \n\
+    WHERE id_login2 = " + id;
+    mysqlConnection.query(sql, function(error, resultado){
+        if(error) console.log(error) + console.log("No hemos podido procesar su solicitud");
+        else response.send(resultado) + console.log(resultado); 
+    })
+})
+
+routes.get("/nombre/protectora", function(request, response){
+    let id = request.query.id;
+    let sql = "SELECT DISTINCT nombre FROM chat AS c \n\
     INNER JOIN login AS l \n\
-    ON (c.id_login1 = l.id_login) \n\
+    ON (c.id_login2 = l.id_login) \n\
     INNER JOIN protectora AS p \n\
     ON (l.id_protectora = p.id_Protectora) \n\
-    WHERE c.id_login1 = " + id;
+    WHERE c.id_login2 = " + id;
     mysqlConnection.query(sql, function(error, resultado){
         if(error) console.log(error) + console.log("No hemos podido procesar su solicitud");
         else response.send(resultado) + console.log(resultado);
     })
 })
 
-routes.get("/chat/login2/protectora", function(request, response){
+routes.get("/nombre/adoptante", function(request, response){
     let id = request.query.id;
-    let sql = "SELECT * FROM chat AS c \n\
+    let sql = "SELECT DISTINCT nombre, apellidos FROM chat AS c \n\
     INNER JOIN login AS l \n\
-    ON (c.id_login2 = l.id_login) \n\
-    INNER JOIN protectora AS p \n\
-    ON (l.id_protectora = p.id_Protectora) \n\
+    ON (c.id_login1 = l.id_login) \n\
+    INNER JOIN adoptante AS a \n\
+    ON (l.id_adoptante = a.id_adoptante) \n\
     WHERE c.id_login2 = " + id;
     mysqlConnection.query(sql, function(error, resultado){
         if(error) console.log(error) + console.log("No hemos podido procesar su solicitud");
@@ -71,6 +81,32 @@ routes.get("/chat/login2/protectora", function(request, response){
 routes.get("/mensaje", function(request, response){
     let id = request.query.id;
     let sql = "SELECT * FROM mensaje WHERE id_chat = " + id;
+    mysqlConnection.query(sql, function(error, resultado){
+        if(error) console.log(error) + console.log("No hemos podido procesar su solicitud");
+        else response.send(resultado) + console.log(resultado);
+    })
+})
+
+routes.get('/idchat', (request, response) => {
+    let sql = "SELECT DISTINCT id_chat FROM mensaje";
+    let id_emisor = request.query.id_emisor;
+    let id_receptor = request.query.id_receptor;
+    id_emisor = (!id_emisor || id_emisor === "")? false : id_emisor; 
+    id_receptor = (!id_receptor || id_receptor === "")? false : id_receptor;
+
+    if (id_emisor || id_receptor){
+    
+        sql = sql + " WHERE ";
+        if (id_emisor) {
+            sql = `${sql} id_emisor='${id_emisor}' AND `
+        }
+        if (id_receptor) {
+            sql = `${sql} id_receptor='${id_receptor}' AND `
+        }
+         
+        sql = sql.substring(0, sql.length - 4);
+    }
+ 
     mysqlConnection.query(sql, function(error, resultado){
         if(error) console.log(error) + console.log("No hemos podido procesar su solicitud");
         else response.send(resultado) + console.log(resultado);
