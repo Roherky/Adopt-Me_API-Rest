@@ -64,7 +64,6 @@ routes.get('/animal',(req, res)=>{
 })
 
 routes.post('/animal',(req, res)=>{
-    console.log('post')
 
     let sql="INSERT INTO animal (nombre, raza, sexo, imagen, tipo_animal, estado, fecha_ingresso, descripcion,  id_protectora,tamanyo) VALUES ('" + req.body.nombre +"', '"+
     req.body.raza + "', '"+
@@ -92,7 +91,6 @@ routes.post('/animal',(req, res)=>{
 })
 
 routes.put('/animal',(req, res)=>{
-    console.log('pull');
 
     let params=[req.body.nombre,
         req.body.raza,
@@ -132,7 +130,6 @@ routes.put('/animal',(req, res)=>{
 })
 
 routes.delete('/animal',(req, res)=>{
-    console.log('delete');
     var idAnimal= req.body.idAnimal;
     let sql="DELETE FROM animal WHERE idAnimal="+idAnimal;
     console.log(idAnimal)

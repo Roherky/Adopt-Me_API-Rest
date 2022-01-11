@@ -192,4 +192,20 @@ routes.post("/mensaje", function(request, response){
     })
 })
 
+routes.delete("/chat", function(request, response){
+    let id = request.body.id_chat;
+    let sql = "DELETE FROM mensaje WHERE id_chat = " + id;
+    let sql2 = "DELETE FROM chat WHERE id_chat = " + id; 
+    mysqlConnection.query(sql, function(error, resultado){
+        if(!error){
+            mysqlConnection.query(sql2, function(error, resultado){
+                if(!error) response.send(resultado) + console.log(resultado);
+                else console.log(error);
+            })
+            console.log(resultado);
+        }
+        else console.log(error);
+    })
+})
+
 module.exports = routes;
