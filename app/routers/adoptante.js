@@ -73,7 +73,7 @@ routes.put("/adoptante", function(req, res){
     "descripcion = COALESCE(?, descripcion) , " + 
     "imagenPerfil = COALESCE(?, imagenPerfil)  WHERE id_Adoptante = ?";
     console.log(sql);
-    mysqlConnection.query(sql, params,function (err, result) {
+    mysqlConnection.query(sql, params, function (err, result) {
         if(err) {
             console.log(err);
         }

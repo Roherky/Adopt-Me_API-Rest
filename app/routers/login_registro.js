@@ -80,4 +80,53 @@ router.post('/registro/adoptante', (req, res) => {
     })
 })
 
+// Endpoint para cambiar contraseña
+router.put('/password', (request, response) => {
+    let params = [
+                    request.body.password,
+                    request.body.email
+                 ]
+    let sql = "UPDATE login SET password = COALESCE (?, password) WHERE email = ?";
+    mysqlConnection.query(sql, params, function (err, result){
+        if(err) {
+            console.log(err);
+        }
+        else 
+        {
+            response.send(result);
+        }
+    })
+})
+
+// Endpoint para borrar cuenta
+// router.delete("/adoptante", (request, response) => {
+//     let id = request.body.id_Adoptante;
+//     let sql = "DELETE FROM adoptante WHERE id_Adoptante = " + id;
+//     mysqlConnection.query(sql, function(error, resultado){
+//         if(!error){
+//             sql = "DELETE FROM login WHERE id_adoptante = " + id;
+//             mysqlConnection.query(sql2, function(error, resultado){
+//                 if(!error) response.send(String(resultado.affectedRows));
+//                 else console.log(error) + console.log("No hemos podido procesar su solicitud");
+//             })
+//         }
+//         else console.log(error) + console.log("No hemos podido procesar su solicitud");
+//     })
+// })
+
+// router.delete("/protectora", (request, response) => {
+//     let id = request.body.id_Protectora;
+//     let sql = "DELETE FROM protectora WHERE id_Protectora = " + id;
+//     mysqlConnection.query(sql, function(error, resultado){
+//         if(!error){
+//             sql = "DELETE FROM login WHERE id_protectora = " + id;
+//             mysqlConnection.query(sql, function(error, resultado){
+//                 if(!error) response.send(String(resultado.affectedRows));
+//                 else console.log(error) + console.log("No hemos podido procesar su solicitud");
+//             })
+//         }
+//         else console.log(error) + console.log("No hemos podido procesar su solicitud");
+//     })
+// })
+
 module.exports = router
